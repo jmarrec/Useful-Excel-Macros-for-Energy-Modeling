@@ -106,15 +106,15 @@ And here's the output:
 
 In "ThisWorkbook" you have shortcuts that I use on a daily basis. Feel free to adapt or delete completely.
 
-* <kdb>CTRL</kdb> + <kdb>SHIFT</kdb> + <kdb>F1</kdb> = Change Reference style to R1C1
+* `CTRL` + `SHIFT` + `F1` = Change Reference style to R1C1
     
-* <kdb>ALT</kdb> + <kdb>LEFT</kdb> = Decrease number of Decimal places
+* `ALT` + `LEFT` = Decrease number of Decimal places by 1
     
-* <kdb>ALT</kdb> + <kdb>RIGHT</kdb> = Increase number of Decimal places
+* `ALT` + `RIGHT` = Increase number of Decimal places by 1
     
-* <kdb>CTRL</kdb> + <kdb>ALT</kdb> + <kdb>C</kdb> = Center cell horizontally and vertically
+* `CTRL` + `ALT` + `C` = Center cell horizontally and vertically
 
-* <kdb>CTRL</kdb> + <kdb>SHIFT</kdb> + <kdb>P</kdb> = Paste Values Only
+* `CTRL` + `SHIFT` + `P` = Paste Values Only
 
 
 
@@ -122,4 +122,4 @@ In "ThisWorkbook" you have shortcuts that I use on a daily basis. Feel free to a
 
 **Happy modeling and don't hesitate to reach out to me for any bugs or comments.**
 
-I'll also welcome pull request.
+I'll also welcome pull requests.
