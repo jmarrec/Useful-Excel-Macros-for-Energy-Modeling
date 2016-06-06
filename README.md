@@ -3,8 +3,8 @@
 * Some shortcuts
 * A macro to export an Excel table to an IDF format for import into IDF Editor or to paste in the idf file directly
 * A macro to export an excel table to a JSON array of hash: useful when working with ruby and the OpenStudio bindings especially
+* A macro to generate a ruby script to create curves using the OpenStudio ruby bindings, using IDF objects as input
 
-This is related to my answer on Unmet Hours on the post [EnergyPlus IDF editor copy paste](https://unmethours.com/question/17809/energyplus-idf-editor-copy-paste)
 
 # Instructions
 
@@ -28,8 +28,7 @@ On the right side, at the top, "Choose commands from" and select Macro. Find "Ex
 Click on "Rename". "Export_To_IDF" can be called "Export to IDF" for example.
 (You can also choose a pretty icon like an up arrow for example...)
 
-6. Repeat 5. for "Export_To_JSON_Array_Of_Hash"
-
+6. Repeat 5. for "Export_To_JSON_Array_Of_Hash", etc
 
 
 ## Excel to IDF
@@ -37,6 +36,8 @@ Click on "Rename". "Export_To_IDF" can be called "Export to IDF" for example.
 ### Usage 
 
 For exporting from IDF to IDF Editor or idf file, I wrote a macro that will read in an excel table and export that to an IDF compatible object so that you can paste it in the IDF editor or in your .idf text file itself.
+
+This is related to my answer on Unmet Hours on the post [EnergyPlus IDF editor copy paste](https://unmethours.com/question/17809/energyplus-idf-editor-copy-paste). I wrote the macro more than 2 years ago for the same purpose, but only recently realized it could be useful to others.
 
 I've personally added this macro to an Excel Add-In and added a button on a separate tab for easy access:
 
@@ -73,9 +74,6 @@ And Here's the output it produced for the example table:
         (3,3);
 
 
-
-
-
 ## Export table to JSON array of Hash
 --------------------------------------
 
@@ -101,6 +99,38 @@ And here's the output:
     {:zone => 'Zone 6',:supplyAirFlowrate => 6.072,:cooling_cop => 5.75,:fan_pressure_rise => 896.4,:total_fan_eff => 0.474,},
     ]
 
+## OpenStudio Ruby Curve Creator.
+
+From a table taken from the IDF editor, it will generate Ruby code to generate the curves.
+
+I added a spreadsheet that includes instructions and that allows you to generate all types of curves in one go. But I also added it in the add-in, because sometimes you don't want to spin a workbook to do a task.
+
+Here's an example of a table with two Quadratic curves.
+
+![OpenStudio Ruby Curve Creator](/doc/OpenStudioRubyCurveCreator.png)
+
+And here's the code it generates:
+
+```
+curve = OpenStudio::Model::CurveQuadratic.new(model)
+curve.setName('CurveQuad1')
+curve.setCoefficient1Constant(0)
+curve.setCoefficient2x(1)
+curve.setCoefficient3xPOW2(0)
+curve.setMinimumValueofx(0.03)
+curve.setMaximumValueofx(1)
+
+curve = OpenStudio::Model::CurveQuadratic.new(model)
+curve.setName('CurveQuad2')
+curve.setCoefficient1Constant(0.7516)
+curve.setCoefficient2x(0.00414)
+curve.setCoefficient3xPOW2(0)
+curve.setMinimumValueofx(29.44)
+curve.setMaximumValueofx(85)
+curve.setInputUnitTypeforX('Temperature')
+curve.setOutputUnitType('Dimensionless')
+```
+
 
 ## Shortcuts
 
@@ -120,6 +150,6 @@ In "ThisWorkbook" you have shortcuts that I use on a daily basis. Feel free to a
 
 ### Contact and Contribution
 
-**Happy modeling and don't hesitate to reach out to me for any bugs or comments.**
+**Happy modeling and don't hesitate to reach out to me for any bugs or comments, using the "issues" tab preferably.**
 
 I'll also welcome pull requests.
