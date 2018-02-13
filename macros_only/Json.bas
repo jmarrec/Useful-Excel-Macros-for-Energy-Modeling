@@ -1,8 +1,9 @@
 Attribute VB_Name = "Json"
-Sub Export_To_JSON_Array_Of_Hash()
+Sub Export_To_JSON()
 ' Author: Julien Marrec
 ' Date: 2016-04-28
-' Version: 1.0
+' Modified: 2016-07-21
+' Version: 1.1
 ' References: Microsoft Forms Object 2.0, needed for using the Clipboard
 
 ' Export current region to a JSON array of hash you can paste in ruby for example
@@ -37,7 +38,7 @@ End With
 
 
 ' Initialize s
-s = "myhash = ["
+s = "{ ""data"": ["
 
 ' Will set the Hash keys as the first line, so we start iterating on the last
 For i = rS + 1 To rE Step 1
@@ -46,26 +47,35 @@ For i = rS + 1 To rE Step 1
     
     For j = cS To cE Step 1
     
-        hash_key = s & ":" & wS.Cells(rS, j).Value
+        hash_key = s & """" & wS.Cells(rS, j).Value & """"
         
-        
-        If IsNumeric(wS.Cells(i, j).Value) Then
+        If IsEmpty(wS.Cells(i, j).Value) Then
+            hash_value = "nil"
+        ElseIf IsNumeric(wS.Cells(i, j).Value) Then
             hash_value = wS.Cells(i, j).Value
         Else
-            hash_value = "'" & wS.Cells(i, j).Value & "'"
+            hash_value = """" & wS.Cells(i, j).Value & """"
         End If
         
     
-        s = hash_key & " => " & hash_value & ","
-    
-    
+        If j < cE Then
+            s = hash_key & ":" & hash_value & ","
+        ElseIf j = cE Then
+            s = hash_key & ":" & hash_value
+        End If
+        
+        
     Next j
     
-    s = s & "}," & vbCrLf
+    If i < rE Then
+        s = s & "}," & vbCrLf
+    ElseIf i = rE Then
+        s = s & "}" & vbCrLf
+    End If
 
 Next i
 
-s = s & "]"
+s = s & "] }"
 
 Debug.Print s
 
