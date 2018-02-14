@@ -2,7 +2,8 @@
 
 * Some shortcuts
 * A macro to export an Excel table to an IDF format for import into IDF Editor or to paste in the idf file directly
-* A macro to export an excel table to a JSON array of hash: useful when working with ruby and the OpenStudio bindings especially
+* A macro to export an excel table to a Ruby array of hash: useful when working with ruby and the OpenStudio bindings especially
+* A macro to export an excel table to JSON
 * A macro to generate a ruby script to create curves using the OpenStudio ruby bindings, using IDF objects as input
 * Psychrometrics function to calculate the humidity ratio from RH(%) to Dry Bulb Temperature in SI units, useful to model Coil:Cooling:Water
 
