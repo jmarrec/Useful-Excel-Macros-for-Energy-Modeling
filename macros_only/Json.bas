@@ -50,7 +50,7 @@ For i = rS + 1 To rE Step 1
         hash_key = s & """" & wS.Cells(rS, j).Value & """"
         
         If IsEmpty(wS.Cells(i, j).Value) Then
-            hash_value = 0
+            hash_value = "null"
         ElseIf IsNumeric(wS.Cells(i, j).Value) Then
             hash_value = wS.Cells(i, j).Value
         Else
